@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Nom</ion-label>
+    <ion-input [(ngModel)]="lastname"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Prénom</ion-label>
+    <ion-input [(ngModel)]="firstname"></ion-input>
+  </ion-item>
+  <ion-item>
+  <ion-label position="floating">Login</ion-label>
+    <ion-input [(ngModel)]="login"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Mot de passe</ion-label>
+    <ion-input type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+  <ion-button expand="round" (click)="signOn()" >S'inscrire</ion-button>
+</ion-content>
