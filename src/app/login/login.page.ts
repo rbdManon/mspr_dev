@@ -1,18 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
-  login:string;
-  password:string;
-  constructor(public navCtrl : NavController ) { }
+  formLogin : FormGroup;
+  constructor(public navCtrl : NavController, public formBuilder: FormBuilder) {
+     // Create the form and define fields and validators.
+     this.formLogin = this.formBuilder.group({
+      login:['', Validators.required],
+      password:['', Validators.required],
+    });
+   }
   signIn(){
-    if(this.login != null && this.password != null ){
-      this.navCtrl.navigateForward('home');
+    if (this.formLogin.valid) {
+            this.navCtrl.navigateForward('home');
+    }else{
+      alert('Tentative de connexion échouée. Veuillez réessayer.')
     }
   }
   goRegister(){
