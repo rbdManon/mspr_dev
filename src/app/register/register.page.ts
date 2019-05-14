@@ -13,7 +13,7 @@ export class RegisterPage implements OnInit {
   password:string;
   constructor(public navCtrl: NavController) { }
   signOn(){
-      this.navCtrl.navigateForward('log')
+      this.navCtrl.navigateForward('login')
   }
   ngOnInit() {
   }

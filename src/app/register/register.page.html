@@ -5,21 +5,23 @@
 </ion-header>
 
 <ion-content>
+  <form (ngSubmit)="signOn()">
   <ion-item>
     <ion-label position="floating">Nom</ion-label>
-    <ion-input [(ngModel)]="lastname"></ion-input>
+    <ion-input [(ngModel)]="lastname" name="lastname"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="floating">Prénom</ion-label>
-    <ion-input [(ngModel)]="firstname"></ion-input>
+    <ion-input [(ngModel)]="firstname" name="firstname"></ion-input>
   </ion-item>
   <ion-item>
   <ion-label position="floating">Login</ion-label>
-    <ion-input [(ngModel)]="login"></ion-input>
+    <ion-input [(ngModel)]="login" name="login"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="floating">Mot de passe</ion-label>
-    <ion-input type="password" [(ngModel)]="password"></ion-input>
+    <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
   </ion-item>
-  <ion-button expand="round" (click)="signOn()" >S'inscrire</ion-button>
+  <ion-button expand="round" type="submit" >S'inscrire</ion-button>
+</form>
 </ion-content>
