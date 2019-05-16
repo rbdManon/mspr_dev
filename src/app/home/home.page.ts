@@ -11,6 +11,9 @@ export class HomePage implements OnInit {
   toMap(){
     this.navCtrl.navigateForward('map');
   }
+  toFormList(){
+    this.navCtrl.navigateForward('form/list');
+  }
   ngOnInit() {
   }
 }
