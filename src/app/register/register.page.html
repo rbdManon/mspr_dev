@@ -5,21 +5,39 @@
 </ion-header>
 
 <ion-content>
+  <form (ngSubmit)="signOn()" [formGroup]="formRegister">
   <ion-item>
-    <ion-label position="floating">Nom</ion-label>
-    <ion-input [(ngModel)]="lastname"></ion-input>
+    <ion-label position="floating">Nom:  </ion-label>
+    <ion-input formControlName="lastname"></ion-input>
   </ion-item>
+  <ion-item *ngIf="!formRegister.controls.lastname.valid  && (formRegister.controls.lastname.dirty || submitAttempt)">
+    <p>Veuillez saisir votre nom.</p>
+  </ion-item>
+
   <ion-item>
-    <ion-label position="floating">Prénom</ion-label>
-    <ion-input [(ngModel)]="firstname"></ion-input>
+    <ion-label position="floating">Prénom: </ion-label>
+    <ion-input formControlName="firstname" ></ion-input>
   </ion-item>
+  <ion-item *ngIf="!formRegister.controls.firstname.valid  && (formRegister.controls.firstname.dirty || submitAttempt)">
+    <p>Veuillez saisir votre prénom.</p>
+  </ion-item>
+
   <ion-item>
-  <ion-label position="floating">Login</ion-label>
-    <ion-input [(ngModel)]="login"></ion-input>
+  <ion-label position="floating">Login: </ion-label>
+  <ion-input formControlName="login" ></ion-input>
   </ion-item>
+  <ion-item *ngIf="!formRegister.controls.login.valid  && (formRegister.login.firstname.dirty || submitAttempt)">
+    <p>Veuillez saisir votre login.</p>
+  </ion-item>
+
   <ion-item>
-    <ion-label position="floating">Mot de passe</ion-label>
-    <ion-input type="password" [(ngModel)]="password"></ion-input>
+    <ion-label position="floating">Mot de passe: </ion-label>
+    <ion-input type="password" formControlName="password"></ion-input>
   </ion-item>
-  <ion-button expand="round" (click)="signOn()" >S'inscrire</ion-button>
+  <ion-item *ngIf="!formRegister.controls.password.valid  && (formRegister.controls.password.dirty || submitAttempt)">
+    <p>Veuillez saisir votre mot de passe.</p>
+  </ion-item>
+
+  <ion-button expand="round" type="submit" >S'inscrire</ion-button>
+</form>
 </ion-content>

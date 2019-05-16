@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-
 const routes: Routes = [
-  { path: '', redirectTo: 'log', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
-  { path: 'log', loadChildren: './log/log.module#LogPageModule' },
-  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },  { path: 'map', loadChildren: './map/map.module#MapPageModule' },
-
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
+  { path: 'calculator', loadChildren: './calculator/calculator.module#CalculatorPageModule' },
+  
 ];
 
 @NgModule({

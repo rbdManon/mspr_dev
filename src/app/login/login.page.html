@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>APP</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img src="./assets/logo.png" />
+  <form  (ngSubmit)="signIn()" [formGroup]="formLogin">
+    <ion-item>
+      <ion-label position="floating">Login</ion-label>
+      <ion-input formControlName="login" type="text"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!formLogin.controls.login.valid  && (formLogin.controls.login.dirty || submitAttempt)">
+      <p>Veuillez saisir votre login.</p>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!formLogin.controls.password.valid  && (formLogin.controls.password.dirty || submitAttempt)">
+      <p>Veuillez saisir votre mot de passe.</p>
+    </ion-item>
+  
+    <ion-button expand="block round" type="submit">Connexion</ion-button>
+  </form>
+  <ion-button expand="round" color="light" (click)="goRegister()"  >Inscription</ion-button>
+</ion-content>
