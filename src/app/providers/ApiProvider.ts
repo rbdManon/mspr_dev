@@ -25,6 +25,22 @@ export class ApiProvider<E> {
         })
     }
 
+    public create(elem: E) : Promise<E> {
+        return this.HttpClient.post(this.api_endpoint + this.table_name, elem).toPromise().then((res : E) => {
+            return res;
+        });
+    }
+
+    public update(elem: E) : Promise<E> {
+        if(typeof elem['uuid'] == 'undefined') {
+            throw "Can't update ! Missing uuid field !"
+        }
+
+        return this.HttpClient.patch(this.api_endpoint + this.table_name + "/" + elem['uuid'], elem).toPromise().then((res : E) => {
+            return res;
+        });
+    }
+
     private get_table_name() : String {
         if(this.table_name === null) {
             throw "Table name is null!"

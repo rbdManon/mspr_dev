@@ -1,10 +1,12 @@
 export class Practitioner {
-    address: String;
-    city: String;
-    company_name: String;
-    firstname: String;
-    lastname: String;
-    latitide: Number;
-    longitude: Number;
-    postcode: Number;
+    uuid: String
+    address: String
+    city: String
+    companyName: String
+    firstname: String
+    lastname: String
+    latitude: Number
+    longitude: Number
+    postcode: Number
+    uuid_practitionerType: String
 }
