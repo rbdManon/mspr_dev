@@ -2,14 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 import { IonicModule } from '@ionic/angular';
-import { MapPage } from './map.page';
+
+import { MapOfflinePage } from './map-offline.page';
+import { MapOfflineComponent } from '../components/map-component/map-offline.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MapPage
+    component: MapOfflinePage
   }
 ];
 
@@ -18,11 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ],
-  providers: [
-    Geolocation,
-  ],
-  declarations: [MapPage]
+  declarations: [MapOfflinePage,MapOfflineComponent],
+  exports: [MapOfflineComponent]
 })
-export class MapPageModule {}
+export class MapOfflinePageModule {}
