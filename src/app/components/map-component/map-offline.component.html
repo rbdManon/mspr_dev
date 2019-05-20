@@ -1,7 +1,18 @@
-<div *ngFor="let practicioner of practicioners">
-  <div style="margin-left: 10% !important;width: 40%">
-    <h3>Nom : practicioner.name<span style="float:right">Distance : {{ practicioner.distance }}</span></h3>
-    <h2>Adresse : {{ practicioner.address }},{{ practicioner.city }} {{ practicioner.postcode }} </h2>
-    <h2>Type : {{ practicioner.company_name }} </h2>
+<ion-grid style="margin-left: 10%;text-align: center;" padding>
+
+  <div style="width: 40%;display:inline-block" *ngFor="let practicioner of array">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle style="text-align:left">{{ practicioner.firstname }} {{ practicioner.lastname }} <ion-chip
+            style="float: right;color:white" class="{{practicioner.color}}">{{ practicioner.distance }} km</ion-chip>
+        </ion-card-subtitle>
+        <ion-card-title style="text-align: left">{{ practicioner.address }},{{ practicioner.postcode }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <h1>{{ practicioner.companyName }} - {{ practicioner.city }}</h1>
+      </ion-card-content>
+      <ion-chip style="float: right;color:white;background-color:#5772F8">Accéder</ion-chip>
+    </ion-card>
   </div>
-</div>
+
+</ion-grid>

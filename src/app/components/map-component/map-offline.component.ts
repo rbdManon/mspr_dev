@@ -6,7 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./map-offline.component.scss'],
 })
 export class MapOfflineComponent implements OnInit {
-  
+  @Input() array: any[];
+
   constructor() {
   }
 

@@ -20,9 +20,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
   declarations: [MapOfflinePage,MapOfflineComponent],
-  exports: [MapOfflineComponent]
 })
 export class MapOfflinePageModule {}
