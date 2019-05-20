@@ -9,10 +9,7 @@ const routes: Routes = [
   { path: 'map', loadChildren: './map/map.module#MapPageModule' },
   { path: 'calculator', loadChildren: './calculator/calculator.module#CalculatorPageModule' },
   { path: 'map-offline', loadChildren: './map-offline/map-offline.module#MapOfflinePageModule' },
-  { path: 'form/list', loadChildren: './form-list/form-list.module#FormListPageModule' },
-
-
-  
+  { path: 'form/list', loadChildren: './form-list/form-list.module#FormListPageModule' },  
 ];
 
 @NgModule({
