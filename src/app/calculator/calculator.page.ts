@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Validators, FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-calculator',
@@ -7,7 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculatorPage implements OnInit {
 
-  constructor() { }
+  formCalcule : FormGroup;
+  constructor(public navCtrl : NavController, public formBuilder: FormBuilder) {
+     // Create the form and define fields and validators.
+     this.formCalcule = this.formBuilder.group({
+      discountRate:['', Validators.required],
+      grossPurchasePrice:['', Validators.required],
+      discountRateCalculated: ['', Validators.required],
+    });
+  }
+  calcule(){}
 
   ngOnInit() {
   }

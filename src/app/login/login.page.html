@@ -6,17 +6,17 @@
 
 <ion-content>
   <img src="./assets/logo.png" />
-  <form  (ngSubmit)="signIn()" [formGroup]="formLogin">
+  <form  #mdo="ngForm" (ngSubmit)="signIn(mdo)" [formGroup]="formLogin">
     <ion-item>
       <ion-label position="floating">Login</ion-label>
-      <ion-input formControlName="login" type="text"></ion-input>
+      <ion-input formControlName="login" type="text" (keyup.enter)="signIn(mdo)"></ion-input>
     </ion-item>
     <ion-item *ngIf="!formLogin.controls.login.valid  && (formLogin.controls.login.dirty || submitAttempt)">
       <p>Veuillez saisir votre login.</p>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Mot de passe</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
+      <ion-input type="password" formControlName="password" (keyup.enter)="signIn(mdo)"></ion-input>
     </ion-item>
     <ion-item *ngIf="!formLogin.controls.password.valid  && (formLogin.controls.password.dirty || submitAttempt)">
       <p>Veuillez saisir votre mot de passe.</p>

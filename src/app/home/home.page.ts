@@ -6,10 +6,16 @@ import { NavController } from '@ionic/angular';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
-  constructor(public navCtrl : NavController ) { }
+export class HomePage {
+  constructor(public navCtrl: NavController){}
+  toCalculator(){
+    this.navCtrl.navigateForward('calculator');
+  }
   toMap(){
     this.navCtrl.navigateForward('map-offline');
+  }
+  toFormList(){
+    this.navCtrl.navigateForward('form/list');
   }
   ngOnInit() {
   }
