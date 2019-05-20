@@ -5,11 +5,11 @@ import { HttpClient } from '@angular/common/http';
     providedIn: 'root'
   })
 export class ApiProvider<E> {
-    private api_endpoint: string = "http://localhost:8080/";
+    protected api_endpoint: string = "http://localhost:8080/";
     protected table_name: string = null;
 
     public constructor(
-        private HttpClient: HttpClient,
+        protected HttpClient: HttpClient,
     ) {}
 
     public getAll() : Promise<E[]> {
@@ -41,7 +41,7 @@ export class ApiProvider<E> {
         });
     }
 
-    private get_table_name() : String {
+    protected get_table_name() : String {
         if(this.table_name === null) {
             throw "Table name is null!"
         }

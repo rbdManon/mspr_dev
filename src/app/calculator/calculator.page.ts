@@ -14,12 +14,22 @@ export class CalculatorPage implements OnInit {
   constructor(public navCtrl : NavController, public formBuilder: FormBuilder) {
      // Create the form and define fields and validators.
      this.formCalcule = this.formBuilder.group({
-      discountRate:['', Validators.required],
-      grossPurchasePrice:['', Validators.required],
-      discountRateCalculated: ['', Validators.required],
+      discountRate:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
+      grossPurchasePrice:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
+      multiplicationCoefficient:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
+      netPurchasePrice:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
+      netSellingPrice:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
+      discountRateCalculated: [''],
+      netPurchasePriceCalculated:[''],
+      netSellingPriceCalculated:[''],
+      multiplicationCoefficientCalculated: [''],
+
     });
   }
-  calcule(){}
+  calcule(){
+    console.debug(this.formCalcule.value)
+
+  }
 
   ngOnInit() {
   }
