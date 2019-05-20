@@ -10,7 +10,7 @@
         <ion-col col-2>
           <ion-item class="padding-left-2px">
               <ion-label position="floating">Taux de remise </ion-label>
-              <ion-input formControlName="discountRate" type="text"></ion-input>
+              <ion-input formControlName="discountRate" type="text" (change)="calcule()"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col col-2>
@@ -22,28 +22,46 @@
         <ion-col col-2>
             <ion-item class="padding-left-2px">
                 <ion-label position="floating">Coefficient multiple </ion-label>
-                <ion-input formControlName="discountRate" type="text"></ion-input>
+                <ion-input formControlName="multiplicationCoefficient" type="text"></ion-input>
             </ion-item>
         </ion-col>
         <ion-col col-2>
             <ion-item class="padding-left-2px">
                 <ion-label position="floating">Prix d'achat net </ion-label>
-                <ion-input formControlName="discountRate" type="text"></ion-input>
+                <ion-input formControlName="netPurchasePrice" type="text"></ion-input>
             </ion-item>
         </ion-col>
         <ion-col col-2>
             <ion-item class="padding-left-2px">
                 <ion-label position="floating">Prix de vente net </ion-label>
-                <ion-input formControlName="discountRate"  type="text"></ion-input>
+                <ion-input formControlName="netSellingPrice"  type="text"></ion-input>
             </ion-item>
         </ion-col>
       </ion-row> 
       <h4> Résultats</h4>
       <ion-row>
           <ion-item>
-              <ion-label >Taux de remise </ion-label>
+              <ion-label >Taux de remise = </ion-label>
               <ion-input formControlName="discountRateCalculated"  readonly type="text"></ion-input>
           </ion-item>
-      </ion-row>   
+      </ion-row>
+      <ion-row>
+        <ion-item>
+            <ion-label >Coefficient multiple  = </ion-label>
+            <ion-input formControlName="netPurchasePriceCalculated"  readonly type="text"></ion-input>
+        </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+          <ion-label >Prix de vente net = </ion-label>
+          <ion-input formControlName="netSellingPriceCalculated"  readonly type="text"></ion-input>
+      </ion-item>
+  </ion-row>
+  <ion-row>
+    <ion-item>
+        <ion-label >Coefficient multiplicateur = </ion-label>
+        <ion-input formControlName="multiplicationCoefficientCalculated"  readonly type="text"></ion-input>
+      </ion-item>
+    </ion-row>           
   </form>
 </ion-content>

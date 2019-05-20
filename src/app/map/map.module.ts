@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonicModule } from '@ionic/angular';
 import { MapPage } from './map.page';
+import { HttpClient } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
   ],
   providers: [
     Geolocation,
+    HttpClient
   ],
   declarations: [MapPage]
 })
