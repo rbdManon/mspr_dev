@@ -9,7 +9,7 @@ import { NavController } from '@ionic/angular';
 export class HomePage implements OnInit {
   constructor(public navCtrl : NavController ) { }
   toMap(){
-    this.navCtrl.navigateForward('map');
+    this.navCtrl.navigateForward('map-offline');
   }
   ngOnInit() {
   }

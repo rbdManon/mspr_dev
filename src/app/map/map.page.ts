@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Map, tileLayer, marker } from 'leaflet';
 import { NavController } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -19,8 +18,7 @@ export class MapPage implements OnInit {
   };
   constructor(public geolocation: Geolocation,
     public navCtrl: NavController,
-    public httpClient: HttpClient
-  ) { }
+            ) { }
 
   ngOnInit() {
   }
