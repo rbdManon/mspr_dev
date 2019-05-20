@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Validators, FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import sha256 from 'sha256';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { DmoProvider } from '../providers/DmoProvider';
+import { Dmo } from '../models/Dmo'
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -10,33 +11,35 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class LoginPage implements OnInit {
   formLogin : FormGroup;
-  constructor(public navCtrl : NavController, public formBuilder: FormBuilder, public http : HttpClient) {
+  private password : String;
+  private login : String 
+  constructor(private navCtrl : NavController, public formBuilder: FormBuilder, private dmoProvider: DmoProvider) {
      // Create the form and define fields and validators.
      this.formLogin = this.formBuilder.group({
       login:['', Validators.required],
       password:['', Validators.required],
     });
    }
-  signIn(mdo:NgForm){
-    let login = mdo.value.login;
-    let password = sha256(mdo.value.password)
-    console.log('log : '+login + '  pass : ' + password );
-    // this.http.get('http://localhost:8080/dmoes/search/findByLoginAndPassword',
-    // {'email':login, 'password':sha256(password)},
   
-    // );
+  signIn(dmo:NgForm){
+    this.login = dmo.value.login;
+    this.password = sha256(dmo.value.password)
+    console.log('log : '+this.password  + '  pass : ' + this.password  );
     if (this.formLogin.valid) {
-            this.navCtrl.navigateForward('home');
+      this.dmoProvider.getOneByLoginAndPassword(this.login ,this.password ).then(user => {
+        console.debug("GET ONE :" + user)
+        this.navCtrl.navigateForward('home/'+user.uuid);
+      });
     }else{
       alert('Tentative de connexion échouée. Veuillez réessayer.')
-    }
+    }  
   }
-  goRegister(){
+  toRegister(){
     this.navCtrl.navigateForward('register');
   }
 
   ngOnInit() {
-    console.log(sha256('lucas'))
+    //console.log(sha256('manon'))
   }
 
 }
