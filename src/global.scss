@@ -9,3 +9,32 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+ion-header{
+    width: 80% !important;
+    margin: auto;
+}
+
+ion-toolbar{
+    --background : #5772F8 !important;
+    --color : white !important;
+    margin-top: 20px;
+    --border-radius: 5px !important;
+}
+
+.disconnect{
+    float: right;
+    margin-right: 20px;
+}
+
+.home{
+    float: left;
+    margin-left: 20px;
+}
+
+ion-content{
+    --padding-top: 2% !important;
+    width:95% !important;
+    margin-left:10% !important;
+    --overflow: hidden !important;
+}
