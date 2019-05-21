@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MapOfflinePage } from './map-offline.page';
-import { MapOfflineComponent } from '../components/map-offline-component/map-offline.component';
+import { PractitionerPage } from './practitioner.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: MapOfflinePage
+    component: PractitionerPage
   }
 ];
 
@@ -20,8 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ],
-  declarations: [MapOfflinePage,MapOfflineComponent],
+  declarations: [PractitionerPage]
 })
-export class MapOfflinePageModule {}
+export class PractitionerPageModule {}

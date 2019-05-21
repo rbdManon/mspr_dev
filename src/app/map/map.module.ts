@@ -6,6 +6,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonicModule } from '@ionic/angular';
 import { MapPage } from './map.page';
 import { HttpClient } from '@angular/common/http';
+import { MapOnlineComponent } from '../components/map-online-component/map-online.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,6 @@ const routes: Routes = [
     Geolocation,
     HttpClient
   ],
-  declarations: [MapPage]
+  declarations: [MapPage,MapOnlineComponent]
 })
 export class MapPageModule {}

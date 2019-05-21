@@ -1,0 +1,12 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle style="text-align:left">{{ practicioner.firstname }} {{ practicioner.lastname }} <ion-chip
+        style="float: right;color:white" class="{{practicioner.color}}">{{ practicioner.distance }} km</ion-chip>
+    </ion-card-subtitle>
+    <ion-card-title style="text-align: left">{{ practicioner.address }},{{ practicioner.postcode }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <h1>{{ practicioner.companyName }} - {{ practicioner.city }}</h1>
+  </ion-card-content>
+  <ion-chip style="float: right;color:white;background-color:#5772F8">Accéder</ion-chip>
+</ion-card>
