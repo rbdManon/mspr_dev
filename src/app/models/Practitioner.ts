@@ -16,5 +16,15 @@ export class Practitioner {
         self: ResourceUri
         practitioner: ResourceUri
         sales: ResourceUri
-    }   
+    }
+    
+    get name() {
+        let name: String =  this.firstname + " " + this.lastname
+        
+        if(this.companyName !== "" && this.companyName !== null) {
+            name += " (" + this.companyName + ")"
+        }
+
+        return name
+    }
 }

@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="scroll" *ngIf="form && questions" locking="false">
+<ion-content *ngIf="form && questions" locking="false">
   <ion-card>
     <ion-card-header>
       <ion-card-title>Informations du formulaire</ion-card-title>
@@ -13,7 +13,21 @@
     </ion-card-header>
   </ion-card>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Praticien</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        <ion-item>
+            <ion-label>Choisir un praticien</ion-label>
+            <ionic-selectable [(ngModel)]="practitioner" itemValueField="uuid" itemTextField="name"
+              [items]="practitioners" [canSearch]="true" (onChange)="portChange($event)">
+            </ionic-selectable>
+          </ion-item>
+    </ion-card-content>
+  </ion-card>
+
   <app-question *ngFor="let question of questions" [question]="question"></app-question>
 
-  <ion-button class="button button-block button-solid">A block button</ion-button>
+  <ion-button class="button button-block button-solid" (click)="submit()">A block button</ion-button>
 </ion-content>

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { FormPage } from './form.page';
 import { QuestionComponent } from '../components/question/question.component';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    IonicSelectableModule
   ],
   declarations: [FormPage, QuestionComponent],
   exports: [QuestionComponent]

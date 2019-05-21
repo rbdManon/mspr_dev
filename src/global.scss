@@ -26,11 +26,6 @@ ion-toolbar{
     margin-left: 20px;
 }
 
-ion-content{
-    --padding-top: 2% !important;
-    --overflow: hidden !important;
-}
-
 .margin-left{
     margin-right: 5%;
 }
@@ -45,9 +40,4 @@ ion-content{
 
 .orange{
     background-color: orange;
-}
-
-.scroll {
-    overflow: auto !important;
-    --overflow: auto !important;
 }
