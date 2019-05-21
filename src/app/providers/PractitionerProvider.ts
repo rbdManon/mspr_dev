@@ -7,4 +7,8 @@ import { Practitioner } from '../models/Practitioner';
 })
 export class PractitionerProvider extends ApiProvider<Practitioner> {
     protected table_name: string = "practitioners";
+
+    protected get_empty_object() {
+      return new Practitioner();
+    }
 }
