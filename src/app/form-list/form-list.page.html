@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-list *ngIf="forms?.length > 0">
     <ion-item *ngFor="let form of forms">
       <ion-label routerLink="/form/{{form.uuid}}" routerDirection="forward">
         <h2>{{form.name}}</h2>
@@ -13,4 +13,6 @@
       </ion-label>
     </ion-item>
   </ion-list>
+
+  <div class="ion-text-center" *ngIf="forms?.length == 0">Aucun formulaire n'est actuellement disponible.</div>
 </ion-content>

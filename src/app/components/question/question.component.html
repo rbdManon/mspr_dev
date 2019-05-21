@@ -1,11 +1,32 @@
-<div *ngIf="question.questionType == 'MULTIPLE'">
-    Multiple
-</div>
+<ion-card>
+    <ion-card-header>
+        <ion-card-title>{{question.name}}</ion-card-title>
+        <ion-card-subtitle>{{question.description}}</ion-card-subtitle>
+    </ion-card-header>
 
-<div *ngIf="question.questionType == 'FREE'">
-    LIBRE
-</div>
+    <ion-card-content *ngIf="question.questionType == 'MULTIPLE'">
+        <ion-list>
+            <ion-item *ngFor="let option of question._options">
+                <ion-label>{{option}}</ion-label>
+                <ion-checkbox></ion-checkbox>
+            </ion-item>
+        </ion-list>
+    </ion-card-content>
 
-<div *ngIf="question.questionType == 'UNIQUE'">
-    Unique
-</div>
+    <ion-card-content *ngIf="question.questionType == 'UNIQUE'">
+        <ion-list>
+            <ion-radio-group>
+                <ion-item *ngFor="let option of question._options">
+                    <ion-label>{{option}}</ion-label>
+                    <ion-radio value="{{option}}" checked></ion-radio>
+                </ion-item>
+            </ion-radio-group>
+        </ion-list>
+    </ion-card-content>
+
+    <ion-card-content *ngIf="question.questionType == 'FREE'">
+        <ion-item>
+            <ion-input type="text" placeholder="Réponse libre"></ion-input>
+        </ion-item>
+    </ion-card-content>
+</ion-card>

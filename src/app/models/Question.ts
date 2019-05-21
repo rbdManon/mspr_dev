@@ -5,11 +5,19 @@ export class Question {
     uuid: string
     description: string
     name: string
-    options: string
+    private options: string
     questionType: QuestionType
     _links : {
         self: ResourceUri
         question: ResourceUri
         form: ResourceUri
-    }   
+    }
+
+    get _options() {
+        return JSON.parse(this.options);
+    }
+
+    set _options(data) {
+        this.options = JSON.stringify(data)
+    }
 }

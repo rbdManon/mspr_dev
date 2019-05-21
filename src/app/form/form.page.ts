@@ -29,7 +29,6 @@ export class FormPage implements OnInit {
     })
 
     this.QuestionProvider.getByFormUuid(this.form_uuid).then(questions => {
-      console.debug(questions)
       this.questions = questions;
     })
   }
