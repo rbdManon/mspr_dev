@@ -7,14 +7,14 @@ import { FormProvider } from '../providers/FormProvider';
   templateUrl: './form-list.page.html',
   styleUrls: ['./form-list.page.scss'],
 })
-export class FormListPage implements OnInit {
+export class FormListPage {
   public forms: Form[];
 
   constructor(
     private FormProvider: FormProvider,
   ) { }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.FormProvider.getAll().then(forms => {
       this.forms = forms;
     })

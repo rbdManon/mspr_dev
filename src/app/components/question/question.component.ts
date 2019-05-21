@@ -6,11 +6,11 @@ import { Question } from 'src/app/models/Question';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss'],
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent {
   @Input() question: Question;
 
   constructor() { }
-
-  ngOnInit() {
+  
+  ionViewDidEnter() {
   }
 }

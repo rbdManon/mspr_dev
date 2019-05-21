@@ -10,7 +10,7 @@ import { QuestionProvider } from '../providers/QuestionProvider';
   templateUrl: './form.page.html',
   styleUrls: ['./form.page.scss'],
 })
-export class FormPage implements OnInit {
+export class FormPage {
   public form_uuid: string;
   public form: Form;
   public questions: Question[];
@@ -21,7 +21,7 @@ export class FormPage implements OnInit {
     private QuestionProvider: QuestionProvider,
   ) { }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.form_uuid = this.route.snapshot.paramMap.get('uuid');
 
     this.FormProvider.getOne(this.form_uuid).then(form => {
