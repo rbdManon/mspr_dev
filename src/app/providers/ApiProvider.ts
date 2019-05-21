@@ -47,15 +47,29 @@ export class ApiProvider<E> {
             });
     }
 
+    public delete(elem: E): Promise<E> {
+        if (typeof elem['uuid'] == 'undefined') {
+            throw "Can't delete ! Missing uuid field !"
+        }
+        else {
+            return this.RestProvider.delete(this.api_endpoint + this.get_table_name() + "/" + elem['uuid'])
+                .then((res: E) => {
+                    return res;
+                });
+        }
+    }
+
     public update(elem: E): Promise<E> {
         if (typeof elem['uuid'] == 'undefined') {
             throw "Can't update ! Missing uuid field !"
         }
+        else {
+            return this.RestProvider.patch(this.api_endpoint + this.get_table_name() + "/" + elem['uuid'], elem)
+                .then((res: E) => {
+                    return res;
+                });
 
-        return this.RestProvider.patch(this.api_endpoint + this.get_table_name() + "/" + elem['uuid'], elem)
-            .then((res: E) => {
-                return res;
-            });
+        }
     }
 
     protected get_table_name(): String {

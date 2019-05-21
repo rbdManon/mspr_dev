@@ -20,4 +20,8 @@ export class RestProvider {
     public patch(url: string, elem) {
         return this.HttpClient.patch(url, elem).toPromise()
     }
+
+    public delete(url: string) {
+        return this.HttpClient.delete(url).toPromise()
+    }
 }
