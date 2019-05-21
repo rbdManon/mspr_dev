@@ -48,6 +48,6 @@ ion-content{
 }
 
 .scroll {
-    overflow: scroll !important;
-    --overflow: scroll !important;
+    overflow: auto !important;
+    --overflow: auto !important;
 }
