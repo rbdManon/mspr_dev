@@ -1,6 +1,5 @@
 import { PractitionerType } from './PractitionerType';
 import { ResourceUri } from './ResourceUri';
-import { Sale } from './Sale';
 
 export class Practitioner {
     uuid: String
@@ -13,9 +12,9 @@ export class Practitioner {
     longitude: Number
     postcode: Number
     practitionerType: PractitionerType
-    sales: Sale[]
     _links : {
         self: ResourceUri
         practitioner: ResourceUri
+        sales: ResourceUri
     }   
 }
