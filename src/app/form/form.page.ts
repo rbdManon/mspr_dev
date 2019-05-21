@@ -23,12 +23,13 @@ export class FormPage implements OnInit {
 
   ngOnInit() {
     this.form_uuid = this.route.snapshot.paramMap.get('uuid');
+
     this.FormProvider.getOne(this.form_uuid).then(form => {
       this.form = form;
     })
 
-    this.QuestionProvider.getOne(this.form_uuid).then(form => {
-      this.form = form;
+    this.QuestionProvider.getByFormUuid(this.form_uuid).then(questions => {
+      this.questions = questions;
     })
   }
 }

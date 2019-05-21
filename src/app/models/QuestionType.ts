@@ -1,4 +1,5 @@
-export class QuestionChoice {
-    uuid: string
-    name: string
+export enum QuestionType {
+    MULTIPLE = "MULTIPLE",
+    UNIQUE = "UNIQUE",
+    FREE = "FREE",
 }
