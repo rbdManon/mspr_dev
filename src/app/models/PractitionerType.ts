@@ -1,4 +1,5 @@
-export class PractitionerType {
-    uuid: string
-    name: string
+export enum PractitionerType {
+    GENERALISTE = "GENERALISTE",
+    SPECIALISTE = "SPECIALISTE",
+    PHARMACIE = "PHARMACIE",
 }

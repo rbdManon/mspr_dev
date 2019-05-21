@@ -1,48 +1,65 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { RestProvider } from './RestProvider';
 
 @Injectable({
     providedIn: 'root'
-  })
+})
 export class ApiProvider<E> {
     protected api_endpoint: string = "http://localhost:8080/";
     protected table_name: string = null;
 
     public constructor(
-        protected HttpClient: HttpClient,
-    ) {}
+        protected RestProvider: RestProvider,
+    ) { }
 
-    public getAll() : Promise<E[]> {
-        return this.HttpClient.get(this.api_endpoint + this.get_table_name()).toPromise()
-        .then((res : E[]) => {
-            return res['_embedded'][this.get_table_name()];
-        })
+    public getAll(): Promise<E[]> {
+        return this.RestProvider.get(this.api_endpoint + this.get_table_name())
+            .then((res: any[]) => {
+                return res['_embedded'][this.get_table_name()];
+            })
     }
 
-    public getOne(uuid: string) : Promise<E> {
-        return this.HttpClient.get(this.api_endpoint + this.get_table_name() + "/" + uuid).toPromise().then((res : E) => {
-            return res;
-        })
+    public getAllByRessourceUri(uri: string): Promise<E> {
+        return this.RestProvider.get(uri)
+            .then((res: any[]) => {
+                return res['_embedded'][this.get_table_name()];;
+            })
     }
 
-    public create(elem: E) : Promise<E> {
-        return this.HttpClient.post(this.api_endpoint + this.table_name, elem).toPromise().then((res : E) => {
-            return res;
-        });
+    public getOne(uuid: string): Promise<E> {
+        return this.RestProvider.get(this.api_endpoint + this.get_table_name() + "/" + uuid)
+            .then((res: E) => {
+                return res;
+            })
     }
 
-    public update(elem: E) : Promise<E> {
-        if(typeof elem['uuid'] == 'undefined') {
+    public getOneByRessourceUri(uri: string): Promise<E> {
+        return this.RestProvider.get(uri)
+            .then((res: E) => {
+                return res;
+            })
+    }
+
+    public create(elem: E): Promise<E> {
+        return this.RestProvider.post(this.api_endpoint + this.get_table_name(), elem)
+            .then((res: E) => {
+                return res;
+            });
+    }
+
+    public update(elem: E): Promise<E> {
+        if (typeof elem['uuid'] == 'undefined') {
             throw "Can't update ! Missing uuid field !"
         }
 
-        return this.HttpClient.patch(this.api_endpoint + this.table_name + "/" + elem['uuid'], elem).toPromise().then((res : E) => {
-            return res;
-        });
+        return this.RestProvider.patch(this.api_endpoint + this.get_table_name() + "/" + elem['uuid'], elem)
+            .then((res: E) => {
+                return res;
+            });
     }
 
-    protected get_table_name() : String {
-        if(this.table_name === null) {
+    protected get_table_name(): String {
+        if (this.table_name === null) {
             throw "Table name is null!"
         }
 

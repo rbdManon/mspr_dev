@@ -9,7 +9,7 @@ export class QuestionProvider extends ApiProvider<Question> {
     protected table_name: string = "questions";
 
     public getByFormUuid(form_uuid : string) : Promise<Question[]> {
-      return this.HttpClient.get(this.api_endpoint + this.get_table_name()).toPromise()
+      return this.RestProvider.get(this.api_endpoint + "forms/" + form_uuid + "/question")
       .then((res : Question[]) => {
           return res['_embedded'][this.get_table_name()];
       })

@@ -1,9 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Formulaire {{form.name}}</ion-title>
+    <ion-title *ngIf="form">Formulaire {{form.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  
+<ion-content *ngIf="form && questions">
+  <div class="description">
+    {{form.description}}
+  </div>
+  Questions :
+  <app-question *ngFor="let question of questions" [question]="question"></app-question>
 </ion-content>

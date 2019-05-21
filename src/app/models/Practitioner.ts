@@ -1,6 +1,9 @@
+import { PractitionerType } from './PractitionerType';
+import { ResourceUri } from './ResourceUri';
+
 export class Practitioner {
     uuid: String
-    address: String
+    address: String 
     city: String
     companyName: String
     firstname: String
@@ -8,5 +11,9 @@ export class Practitioner {
     latitude: Number
     longitude: Number
     postcode: Number
-    uuid_practitionerType: String
+    practitionerType: PractitionerType
+    _links : {
+        self: ResourceUri
+        practitioner: ResourceUri
+    }   
 }

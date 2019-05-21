@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'calculator', loadChildren: './calculator/calculator.module#CalculatorPageModule' },
   { path: 'map-offline', loadChildren: './map-offline/map-offline.module#MapOfflinePageModule' },
   { path: 'form/list', loadChildren: './form-list/form-list.module#FormListPageModule' },  
+  { path: 'form/:uuid', loadChildren: './form/form.module#FormPageModule' },  
 ];
 
 @NgModule({
