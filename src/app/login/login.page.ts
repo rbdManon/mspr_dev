@@ -24,11 +24,11 @@ export class LoginPage implements OnInit {
   signIn(dmo:NgForm){
     this.login = dmo.value.login;
     this.password = sha256(dmo.value.password)
-    console.log('log : '+this.password  + '  pass : ' + this.password  );
+    console.log('log : '+this.login  + '  pass : ' + this.password  );
     if (this.formLogin.valid) {
       this.dmoProvider.getOneByLoginAndPassword(this.login ,this.password ).then(user => {
         console.debug("GET ONE :" + user)
-        this.navCtrl.navigateForward('home/'+user.uuid);
+        this.navCtrl.navigateForward('home');
       });
     }else{
       alert('Tentative de connexion échouée. Veuillez réessayer.')
