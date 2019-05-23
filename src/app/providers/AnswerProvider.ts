@@ -24,11 +24,10 @@ export class AnswerProvider extends ApiProvider<Answer> {
       })
   }
 
-  public getByPractitionerUuidAndQuestionUuid(practitioner_uuid: string, question_uuid: string): Promise<Answer[]> {
-    return this.RestProvider.get(this.api_endpoint + this.get_table_name() + "/search/findAllByPractitionerUuidAndQuestionUuidOrderByDateResponseDesc?uuid_practitioner=" + practitioner_uuid + "&uuid_question=" + question_uuid)
-      .then((res: Answer[]) => {
-        let json = res['_embedded'][this.get_table_name()]
-        return this.map_array_objects(json);
+  public getByPractitionerUuidAndQuestionUuid(practitioner_uuid: string, question_uuid: string): Promise<Answer> {
+    return this.RestProvider.get(this.api_endpoint + this.get_table_name() + "/search/findAllByPractitionerUuidAndQuestionUuid?uuid_practitioner=" + practitioner_uuid + "&uuid_question=" + question_uuid)
+      .then((res: Answer) => {
+        return this.map_object(res);
       })
   }
 

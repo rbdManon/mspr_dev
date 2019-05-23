@@ -22,7 +22,6 @@ export class QuestionPage {
   practitioner: Practitioner;
   practitioner_uuid: string;
   answer: Answer;
-  previous_answers: Answer[];
 
   constructor(
     private route: ActivatedRoute,
@@ -50,7 +49,7 @@ export class QuestionPage {
     return new Promise((resolve, reject) => {
       Promise.all([this.setPractitioner(), this.setQuestion()])
         .then(() => {
-          Promise.all([this.setAnswer(), this.setQuestionCount(), this.setPreviousAnswers()])
+          Promise.all([this.setAnswer(), this.setQuestionCount()])
             .then(resolve)
             .catch(reject)
         })
@@ -106,26 +105,17 @@ export class QuestionPage {
     })
   }
 
-  setPreviousAnswers() {
-    return new Promise((resolve, reject) => {
-      //Get previous answers
-      this.AnswerProvider.getByPractitionerUuidAndQuestionUuid(this.practitioner_uuid, this.question.uuid)
-        .then(previous_answers => {
-          if (previous_answers) {
-            this.previous_answers = previous_answers;
-            resolve(this.previous_answers)
-          }
-          else {
-            reject()
-          }
-        })
-    })
-  }
-
   setAnswer() {
     return new Promise((resolve, reject) => {
-      this.answer = this.getEmptyAnswer();
-      resolve
+      this.AnswerProvider.getByPractitionerUuidAndQuestionUuid(this.practitioner.uuid, this.question.uuid)
+      .then((answer) => {
+        this.answer = answer
+        resolve()
+      })
+      .catch(() => {
+        this.answer = this.getEmptyAnswer()
+        resolve()
+      })
     })
   }
 
@@ -190,5 +180,24 @@ export class QuestionPage {
         });
         return valid
     }
+  }
+
+  radioChecked(event) {
+    this.answer._response = event.detail.value
+  }
+
+  checkboxChecked(event) {
+    let array = this.answer._response
+
+    if (event.detail.checked) {
+      array.push(event.detail.value)
+    }
+    else {
+      array = array.filter(value => {
+        return value != event.detail.value;
+      });
+    }
+
+    this.answer._response = array
   }
 }

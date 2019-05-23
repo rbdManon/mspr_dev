@@ -5,20 +5,48 @@
 </ion-header>
 
 <ion-content>
+    <ion-card *ngIf="question">
+        <ion-card-header>
+          <ion-card-title>{{question.name}}</ion-card-title>
+          <ion-card-subtitle>{{question.description}}</ion-card-subtitle>
+        </ion-card-header>
+      
+        <ion-card-content *ngIf="question.questionType == 'MULTIPLE'">
+          <ion-list>
+            <ion-item *ngFor="let option of question._options">
+              <ion-label>{{option}}</ion-label>
+              <ion-checkbox value="{{option}}" [checked]="answer?._response.includes(option)" (ionChange)="checkboxChecked($event)"></ion-checkbox>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      
+        <ion-card-content *ngIf="question.questionType == 'UNIQUE'">
+          <ion-list>
+            <ion-radio-group>
+              <ion-item *ngFor="let option of question._options">
+                <ion-label>{{option}}</ion-label>
+                <ion-radio value="{{option}}" [checked]="answer?._response == option" (ionSelect)="radioChecked($event)"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-card-content>
+      
+        <ion-card-content *ngIf="question.questionType == 'FREE'">
+          <ion-item>
+            <ion-input type="text" placeholder="Réponse libre" [(ngModel)]="answer._response"></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+
   <app-question-component [question]="question" [answer]="answer"></app-question-component>
 
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button class="button button-block button-solid" (click)="saveAnswer()" [disabled]="!isAnswerValid()">Enregister & Question suivante
+        <ion-button class="button button-block button-solid" (click)="saveAnswer()" [disabled]="!isAnswerValid()">
+          Enregister & Question suivante
         </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <div *ngIf="previous_answers && question">
-    <app-question-component [question]="question" [answer]="previous_answer" [disabled]="true"
-      *ngFor="let previous_answer of previous_answers">
-    </app-question-component>
-  </div>
 </ion-content>
