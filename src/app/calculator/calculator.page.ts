@@ -3,6 +3,7 @@ import { Validators, FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 
 
+
 @Component({
   selector: 'app-calculator',
   templateUrl: './calculator.page.html',
@@ -11,26 +12,66 @@ import { NavController } from '@ionic/angular';
 export class CalculatorPage implements OnInit {
 
   formCalcule : FormGroup;
+  discountRateCalculated :number;
+  netSellingPriceCalculated :number;
+  netPurchasePriceCalculated :number;
+  multiplicationCoefficientCalculated :number;
+
+  /**
+   * constructor CalulatorPage
+   * @param navCtrl to navigate between page
+   * @param formBuilder to create his form
+   */
   constructor(public navCtrl : NavController, public formBuilder: FormBuilder) {
-     // Create the form and define fields and validators.
+     // Initialize the form and define fields and validators.
      this.formCalcule = this.formBuilder.group({
-      discountRate:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
+      discountRate:['', Validators.pattern(/^[1-9]?[0-9]{1}$|^100$/)],
       grossPurchasePrice:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
       multiplicationCoefficient:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
       netPurchasePrice:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
       netSellingPrice:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
-      discountRateCalculated: [''],
-      netPurchasePriceCalculated:[''],
-      netSellingPriceCalculated:[''],
-      multiplicationCoefficientCalculated: [''],
-
     });
   }
-  calcule(){
-    console.debug(this.formCalcule.value)
+  /**
+   * calcule() 
+   * calcule netPurchasePriceCalculated, discountRateCalculated,netSellingPriceCalculated,multiplicationCoefficientCalculated 
+   * as per data received
+   * @param form NgForm
+   */
+  calcule(form :NgForm){
+    //calcule of netPurchasePriceCalculated
+    if( form.value.grossPurchasePrice.length != 0  && form.value.discountRate.length != 0){
+      this.netPurchasePriceCalculated =  form.value.grossPurchasePrice * (1-  form.value.discountRate/100);
+    }
+    else{
+      this.netPurchasePriceCalculated = 0;
+    }
 
+    //calcule of discountRateCalculated
+    if( form.value.grossPurchasePrice.length != 0 && form.value.netPurchasePrice.length != 0){
+      this.discountRateCalculated = (1 - form.value.netPurchasePrice / form.value.grossPurchasePrice) * 100 ; 
+    }
+    else{
+      this.discountRateCalculated = 0;
+    }
+
+    //calcule of netSellingPriceCalculated
+    if( form.value.netPurchasePrice.length != 0  && form.value.multiplicationCoefficient.length != 0 ){
+      this.netSellingPriceCalculated =  form.value.netPurchasePrice  * form.value.multiplicationCoefficient;
+    }
+    else{
+      this.netSellingPriceCalculated = 0;
+    }
+
+    // calcule of multiplicationCoefficientCalculated
+    if( form.value.netSellingPrice.length != 0 && form.value.netPurchasePrice.length != 0){
+      this.multiplicationCoefficientCalculated = form.value.netSellingPrice / form.value.netPurchasePrice;
+    }
+    else{
+      this.multiplicationCoefficientCalculated = 0;
+    }
   }
-
+ 
   ngOnInit() {
   }
 

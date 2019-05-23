@@ -3,16 +3,16 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'home/:dmo', loadChildren: './home/home.module#HomePageModule' },
+  { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'map', loadChildren: './map/map.module#MapPageModule' },
   { path: 'calculator', loadChildren: './calculator/calculator.module#CalculatorPageModule' },
   { path: 'map-offline', loadChildren: './map-offline/map-offline.module#MapOfflinePageModule' },
   { path: 'form/list', loadChildren: './form-list/form-list.module#FormListPageModule' },  
-  { path: 'practitioner', loadChildren: './practitioner/practitioner.module#PractitionerPageModule' },
   { path: 'form/:uuid', loadChildren: './form/form.module#FormPageModule' },
   { path: 'form/:form_uuid/question/:position', loadChildren: './question/question.module#QuestionPageModule' },
+  { path: 'practitioner/:uuid', loadChildren: './practitioner/practitioner.module#PractitionerPageModule' },
 ];
 
 @NgModule({

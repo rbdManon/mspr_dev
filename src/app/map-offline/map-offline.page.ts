@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PractitionerProvider } from '../providers/PractitionerProvider';
 import { Practitioner } from '../models/Practitioner';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-map-offline',
@@ -11,6 +12,7 @@ export class MapOfflinePage implements OnInit {
   public array = new Array();
 
   constructor(private PractitionerProvider: PractitionerProvider,
+    public navCtrl: NavController
   ) { }
 
   ngOnInit() {

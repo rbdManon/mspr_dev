@@ -25,12 +25,11 @@ export class MapPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('trigger')
   }
 
   ionViewDidEnter() {
     this.initMap(function (response) {
-      // Here you have access to your variable
-      console.log(response);
     })
 
   }
