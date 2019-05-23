@@ -10,9 +10,11 @@ const routes: Routes = [
   { path: 'calculator', loadChildren: './calculator/calculator.module#CalculatorPageModule' },
   { path: 'map-offline', loadChildren: './map-offline/map-offline.module#MapOfflinePageModule' },
   { path: 'form/list', loadChildren: './form-list/form-list.module#FormListPageModule' },  
+  { path: 'form/new', loadChildren: './admin/form-edit/form-edit.module#FormEditPageModule' },
   { path: 'form/:uuid', loadChildren: './form/form.module#FormPageModule' },
   { path: 'form/:form_uuid/question/:position', loadChildren: './question/question.module#QuestionPageModule' },
   { path: 'form/:form_uuid/results', loadChildren: './form-results/form-results.module#FormResultsPageModule' },
+  { path: 'form/:form_uuid/edit', loadChildren: './admin/form-edit/form-edit.module#FormEditPageModule' },
   { path: 'practitioner/:uuid', loadChildren: './practitioner/practitioner.module#PractitionerPageModule' },
 ];
 

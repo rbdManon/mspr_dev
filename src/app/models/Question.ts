@@ -4,8 +4,10 @@ export class Question {
     uuid: string
     description: string
     name: string
+    position: number;
     private options: string
     questionType: QuestionType
+    form: string
     _links : {
         self: ResourceUri
         question: ResourceUri

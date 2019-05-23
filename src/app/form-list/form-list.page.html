@@ -12,8 +12,12 @@
         <p>{{form.description}}</p>
       </ion-label>
       <ion-icon slot="end" name="analytics" routerLink="/form/{{form.uuid}}/results" routerDirection="forward"></ion-icon>
+      <ion-icon slot="end" name="construct" routerLink="/form/{{form.uuid}}/edit" routerDirection="forward"></ion-icon>
+      <ion-icon slot="end" name="trash" (click)="confirmDeleteForm(form)"></ion-icon>
     </ion-item>
   </ion-list>
 
   <div class="ion-text-center" *ngIf="forms?.length == 0">Aucun formulaire n'est actuellement disponible.</div>
+
+  <ion-button class="button button-block button-solid" routerLink="/form/new" routerDirection="forward">Ajouter un formulaire</ion-button>
 </ion-content>

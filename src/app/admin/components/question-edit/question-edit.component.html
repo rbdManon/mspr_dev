@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Édition de la question</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Informations :</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Nom : </ion-label>
+        <ion-input type="text" [(ngModel)]="question.name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Description : </ion-label>
+        <ion-input type="text" [(ngModel)]="question.description"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Type de réponse</ion-label>
+        <ion-select [(ngModel)]="question.questionType" (ionChange)="responseTypeChange()" okText="Valider" cancelText="Annuler">
+          <ion-select-option value="FREE">Libre</ion-select-option>
+          <ion-select-option value="UNIQUE">Choix unique</ion-select-option>
+          <ion-select-option value="MULTIPLE">Choix multiple</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="question.questionType === 'UNIQUE' || question.questionType === 'MULTIPLE'">
+    <ion-card-header>
+      <ion-card-title>Réponses possibles :</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item *ngFor="let option of question._options">
+        <ion-input type="text" [(ngModel)]="option"></ion-input>
+        <ion-icon slot="end" name="trash" (click)="deleteOption(option)"></ion-icon>
+      </ion-item>
+
+      <div style="text-align: center;">
+        <ion-button class="button button-solid" (click)="addOption()">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button class="button button-block button-solid" (click)="save()">Enregistrer</ion-button>
+</ion-content>

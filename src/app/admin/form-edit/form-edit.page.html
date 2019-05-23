@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Édition du formulaire</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="form">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Informations :</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Nom : </ion-label>
+        <ion-input type="text" [(ngModel)]="form.name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Description : </ion-label>
+        <ion-input type="text" [(ngModel)]="form.description"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Questions :</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+        <ion-item *ngFor="let question of questions">
+          <ion-label>
+            {{question.name}}
+          </ion-label>
+          <ion-icon slot="end" name="construct" (click)="updateQuestion(question)"></ion-icon>
+          <ion-icon slot="end" name="trash" (click)="deleteQuestion(question)"></ion-icon>
+          <ion-reorder slot="end"></ion-reorder>
+        </ion-item>
+      </ion-reorder-group>
+      <div style="text-align: center;">
+          <ion-button class="button button-solid" (click)="addQuestion()">
+            <ion-icon name="add"></ion-icon>
+          </ion-button>
+        </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button class="button button-block button-solid" (click)="save()">Enregistrer</ion-button>
+</ion-content>
