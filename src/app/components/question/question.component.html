@@ -4,7 +4,7 @@
     <ion-card-subtitle>{{question.description}}</ion-card-subtitle>
   </ion-card-header>
   <ion-card-header *ngIf="answer?.uuid">
-    <ion-card-title>Réponse du {{answer.dateResponse | date:'dd/MM/yyyy'}}</ion-card-title>
+    <ion-card-title>Le {{answer.dateResponse | date:'dd/MM/yyyy à HH:mm'}}</ion-card-title>
   </ion-card-header>
 
   <ion-card-content *ngIf="question.questionType == 'MULTIPLE'">
