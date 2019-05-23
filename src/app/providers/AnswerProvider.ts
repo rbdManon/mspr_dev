@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiProvider } from './ApiProvider';
 import { Answer } from '../models/Answer';
+import { AnswerCount } from '../models/AnswerCount';
 
 @Injectable({
   providedIn: 'root'

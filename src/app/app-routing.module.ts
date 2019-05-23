@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'form/list', loadChildren: './form-list/form-list.module#FormListPageModule' },  
   { path: 'form/:uuid', loadChildren: './form/form.module#FormPageModule' },
   { path: 'form/:form_uuid/question/:position', loadChildren: './question/question.module#QuestionPageModule' },
+  { path: 'form/:form_uuid/results', loadChildren: './form-results/form-results.module#FormResultsPageModule' },
   { path: 'practitioner/:uuid', loadChildren: './practitioner/practitioner.module#PractitionerPageModule' },
 ];
 

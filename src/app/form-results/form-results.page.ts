@@ -1,5 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
+import { Question } from '../models/Question';
+import { QuestionProvider } from '../providers/QuestionProvider';
+import { ActivatedRoute } from '@angular/router';
+import { AnswerCountProvider } from '../providers/AnswerCountProvider';
+import { AnswerCount } from '../models/AnswerCount';
+import { QuestionType } from '../models/QuestionType';
+import { Answer } from '../models/Answer';
+import DynamicColors from '../utils/DynamicColors';
 
 @Component({
   selector: 'app-form-results',
@@ -7,118 +15,101 @@ import { Chart } from 'chart.js';
   styleUrls: ['./form-results.page.scss'],
 })
 export class FormResultsPage {
+  questions: Question[];
+  answers: { [question_uuid: string]: AnswerCount[] }[];
+  form_uuid: string;
 
-  @ViewChild('barCanvas') barCanvas;
-  @ViewChild('doughnutCanvas') doughnutCanvas;
-  @ViewChild('lineCanvas') lineCanvas;
-
-  barChart: any;
-  doughnutChart: any;
-  lineChart: any;
-
-  constructor() { }
+  constructor(
+    private QuestionProvider: QuestionProvider,
+    private AnswerCountProvider: AnswerCountProvider,
+    private route: ActivatedRoute,
+  ) { }
 
   ionViewDidEnter() {
-    this.barChart = new Chart(this.barCanvas.nativeElement, {
+    this.form_uuid = this.route.snapshot.paramMap.get('form_uuid');
 
-      type: 'bar',
-      data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
+    this.QuestionProvider.getByFormUuidOrderPositionAsc(this.form_uuid)
+      .then((questions) => {
+        this.questions = questions
+        this.getAnswers()
+      })
+  }
 
-    });
+  getAnswers() {
+    this.answers = [];
+    this.questions.forEach((question) => {
+      this.AnswerCountProvider.countResponseByQuestionUuidOrderByCount(question.uuid)
+        .then(answers => {
+          switch (question.questionType) {
+            case QuestionType.FREE:
+              this.answers[question.uuid] = answers;
+              break;
+            case QuestionType.UNIQUE:
+              this.prepareUniqueGraph(question, answers);
+              break;
+            case QuestionType.MULTIPLE:
+              this.prepareMultipleGraph(question, answers);
+              break;
+          }
+        })
+    })
+  }
 
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+  prepareUniqueGraph(question: Question, answers: AnswerCount[]) {
+    let labels = [];
+    let data = [];
+    let backgroundColors = [];
 
+    answers.forEach(answer => {
+      labels.push(answer._response)
+      data.push(answer.total)
+      backgroundColors.push(DynamicColors())
+    })
+
+    new Chart(document.getElementById(question.uuid), {
       type: 'doughnut',
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: labels,
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56",
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56"
-          ]
+          data: data,
+          backgroundColor: backgroundColors,
         }]
       }
-
     });
+  }
 
-    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+  prepareMultipleGraph(question: Question, answers: AnswerCount[]) {
+    let labelsData = [];
+    answers.forEach(answer => {
+      answer._response.forEach(response => {
+        if (labelsData[response] != undefined) {
+          labelsData[response] += answer.total
+        }
+        else {
+          labelsData[response] = answer.total
+        }
+      });
+    })
 
-      type: 'line',
+    let labels = [];
+    let data = [];
+    let backgroundColors = [];
+
+    for (let label in labelsData) {
+      labels.push(label)
+      data.push(labelsData[label])
+      backgroundColors.push(DynamicColors())
+    }
+    
+    new Chart(document.getElementById(question.uuid), {
+      type: 'bar',
       data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [
-          {
-            label: "My First dataset",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40],
-            spanGaps: false,
-          }
-        ]
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: backgroundColors,
+        }]
       }
-
     });
-
   }
 }

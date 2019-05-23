@@ -30,6 +30,14 @@ export class QuestionProvider extends ApiProvider<Question> {
     })
   }
 
+  public getByFormUuidOrderPositionAsc(form_uuid: string): Promise<Question[]> {
+    return this.RestProvider.get(this.api_endpoint + this.get_table_name() + "/search/findAllByFormUuidOrderByPositionAsc?form_uuid=" + form_uuid)
+      .then((res: Question[]) => {
+        let json = res['_embedded'][this.get_table_name()];
+        return this.map_array_objects(json);
+      })
+  }
+
   protected get_empty_object() {
     return new Question();
   }

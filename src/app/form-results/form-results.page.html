@@ -6,31 +6,30 @@
 
 <ion-content>
 
+  <div *ngFor="let question of questions">
     <ion-card>
       <ion-card-header>
-        Bar Chart
+        <ion-card-title>{{question.name}}</ion-card-title>
+        <ion-card-subtitle>{{question.description}}</ion-card-subtitle>
       </ion-card-header>
-      <ion-card-content>
-        <canvas #barCanvas></canvas>
-      </ion-card-content>
-    </ion-card>
 
-    <ion-card>
-      <ion-card-header>
-        Doughnut Chart
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #doughnutCanvas></canvas>
+      <ion-card-content *ngIf="question.questionType === 'FREE'">
+        <ion-list class="ios list-ios hydrated">
+          <ion-item *ngFor="let answer of answers[question.uuid]">
+            <ion-note slot="start" color="primary">{{answer.total}}</ion-note>
+            <ion-label>{{answer._response}}</ion-label>
+          </ion-item>
+        </ion-list>
       </ion-card-content>
-    </ion-card>
 
-    <ion-card>
-      <ion-card-header>
-        Line Chart
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #lineCanvas></canvas>
+      <ion-card-content *ngIf="question.questionType === 'UNIQUE'">
+        <canvas [id]="question.uuid"></canvas>
       </ion-card-content>
+
+      <ion-card-content *ngIf="question.questionType === 'MULTIPLE'">
+          <canvas [id]="question.uuid"></canvas>
+        </ion-card-content>
     </ion-card>
+  </div>
 
 </ion-content>
