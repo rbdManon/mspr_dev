@@ -10,7 +10,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button class="button button-block button-solid" (click)="saveAnswer()">Enregister & Question suivante
+        <ion-button class="button button-block button-solid" (click)="saveAnswer()" [disabled]="!isAnswerValid()">Enregister & Question suivante
         </ion-button>
       </ion-col>
     </ion-row>

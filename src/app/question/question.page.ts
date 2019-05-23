@@ -174,4 +174,21 @@ export class QuestionPage {
         }).then((alert) => alert.present())
       })
   }
+
+  isAnswerValid() {
+    switch (this.question.questionType) {
+      case QuestionType.FREE:
+        return this.answer._response !== ""
+      case QuestionType.UNIQUE:
+        return this.question._options.includes(this.answer._response)
+      case QuestionType.MULTIPLE:
+        let valid = this.answer._response.length > 0;
+        this.answer._response.forEach(checked => {
+          if(!this.question._options.includes(checked)) {
+            valid = false
+          }
+        });
+        return valid
+    }
+  }
 }
