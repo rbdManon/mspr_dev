@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Question {{question_position}}/{{question_count}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-question-component [question]="question" [answer]="answer"></app-question-component>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button class="button button-block button-solid" (click)="saveAnswer()">Enregister & Question suivante
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div *ngIf="previous_answers && question">
+    <app-question-component [question]="question" [answer]="previous_answer" [disabled]="true"
+      *ngFor="let previous_answer of previous_answers">
+    </app-question-component>
+  </div>
+</ion-content>

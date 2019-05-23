@@ -1,6 +1,5 @@
 import { ResourceUri } from './ResourceUri';
 import { QuestionType } from './QuestionType';
-
 export class Question {
     uuid: string
     description: string
@@ -11,6 +10,7 @@ export class Question {
         self: ResourceUri
         question: ResourceUri
         form: ResourceUri
+        answers: ResourceUri
     }
 
     get _options() {

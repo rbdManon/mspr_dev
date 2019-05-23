@@ -5,6 +5,8 @@ export class Sale {
     date: Date
     quantity: Number
     _links : {
+        self: ResourceUri
+        sale: ResourceUri
         product: ResourceUri
         practitioner: ResourceUri
     } 

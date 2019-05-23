@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormProvider } from '../providers/FormProvider';
 import { Form } from '../models/Form';
-import { ActivatedRoute } from '@angular/router';
-import { Question } from '../models/Question';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { QuestionProvider } from '../providers/QuestionProvider';
-import { IonicSelectableComponent } from 'ionic-selectable';
 import { Practitioner } from '../models/Practitioner';
 import { PractitionerProvider } from '../providers/PractitionerProvider';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form',
@@ -16,15 +15,17 @@ import { PractitionerProvider } from '../providers/PractitionerProvider';
 export class FormPage {
   public form_uuid: string;
   public form: Form;
-  public questions: Question[];
+  public question_count: number;
   practitioners: Practitioner[];
   practitioner: Practitioner;
 
   constructor(
     private route: ActivatedRoute,
+    public navCtrl: NavController,
     private FormProvider: FormProvider,
     private QuestionProvider: QuestionProvider,
     private PractitionerProvider: PractitionerProvider,
+    private Router: Router,
   ) { }
 
   ionViewDidEnter() {
@@ -38,19 +39,13 @@ export class FormPage {
       this.practitioners = practitioners;
     })
 
-    this.QuestionProvider.getByFormUuid(this.form_uuid).then(questions => {
-      this.questions = questions;
+    this.QuestionProvider.countByFormUuid(this.form_uuid).then(count => {
+      this.question_count = count;
     })
   }
 
-  portChange(event: {
-    component: IonicSelectableComponent,
-    value: any
-  }) {
-    console.log('port:', event.value);
-  }
-
-  submit() {
-    
+  startForm() {
+    //Navigate to question 1 with the selected parameter
+    this.Router.navigate(['/form/' + this.form_uuid + '/question/1'], { queryParams: { practitioner_uuid: this.practitioner.uuid }})
   }
 }

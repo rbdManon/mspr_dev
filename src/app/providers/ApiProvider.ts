@@ -74,6 +74,15 @@ export class ApiProvider<E> {
         }
     }
 
+    public save(elem: E): Promise<E> {
+        if (typeof elem['uuid'] == 'undefined') {
+            return this.create(elem)
+        }
+        else {
+            return this.update(elem)
+        }
+    }
+
     protected get_table_name(): String {
         if (this.table_name === null) {
             throw "Table name is null!"

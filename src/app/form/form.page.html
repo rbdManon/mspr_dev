@@ -1,33 +1,31 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Réponse au formulaire</ion-title>
+    <ion-title>Formulaire</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="form && questions" locking="false">
+<ion-content *ngIf="form">
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Informations du formulaire</ion-card-title>
+      <ion-card-title>Informations</ion-card-title>
       <ion-card-subtitle><b>Nom :</b> {{form.name}}</ion-card-subtitle>
       <ion-card-subtitle><b>Description :</b> {{form.description}}</ion-card-subtitle>
+      <ion-card-subtitle *ngIf="question_count"><b>Nombre de questions :</b> {{question_count}}</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Praticien</ion-card-title>
+      <ion-card-title>Choisir un praticien</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-        <ion-item>
-            <ion-label>Choisir un praticien</ion-label>
-            <ionic-selectable [(ngModel)]="practitioner" itemValueField="uuid" itemTextField="name"
-              [items]="practitioners" [canSearch]="true" (onChange)="portChange($event)">
-            </ionic-selectable>
-          </ion-item>
+      <ion-item>
+        <ion-label>Praticien</ion-label>
+        <ionic-selectable [(ngModel)]="practitioner" itemValueField="uuid" itemTextField="name" [items]="practitioners" [canSearch]="true">
+        </ionic-selectable>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 
-  <app-question *ngFor="let question of questions" [question]="question"></app-question>
-
-  <ion-button class="button button-block button-solid" (click)="submit()">A block button</ion-button>
+  <ion-button class="button button-block button-solid" [disabled]="!practitioner && question_count > 0" (click)="startForm()">Commencer le formulaire</ion-button>
 </ion-content>

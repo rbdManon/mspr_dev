@@ -16,6 +16,20 @@ export class QuestionProvider extends ApiProvider<Question> {
       })
   }
 
+  public getByFormUuidAndPosition(form_uuid: string, position: number): Promise<Question> {
+    return this.RestProvider.get(this.api_endpoint + this.get_table_name() + "/search/findByFormUuidAndPosition?form_uuid=" + form_uuid + "&position=" + position)
+      .then((res: Question) => {
+        return this.map_object(res);
+      })
+  }
+
+  public countByFormUuid(form_uuid: string): Promise<number> {
+    return this.RestProvider.get(this.api_endpoint + this.get_table_name() + "/search/countAllByFormUuid?form_uuid=" + form_uuid)
+    .then((res: number) => {
+      return res;
+    })
+  }
+
   protected get_empty_object() {
     return new Question();
   }
