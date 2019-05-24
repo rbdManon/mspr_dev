@@ -4,8 +4,32 @@ ion-label{
   text-align: left;
   width: 100%;
 }
-ion-icon{
-  display:block;
-  text-align: right;
-  width: 100%;
+// ion-icon{
+//   display:block;
+//   text-align: left;
+//   width: 100%;
+// }
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 500px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
 }

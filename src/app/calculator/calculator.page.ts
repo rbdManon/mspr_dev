@@ -26,10 +26,10 @@ export class CalculatorPage implements OnInit {
      // Initialize the form and define fields and validators.
      this.formCalcule = this.formBuilder.group({
       discountRate:['', Validators.pattern(/^[1-9]?[0-9]{1}$|^100$/)],
-      grossPurchasePrice:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
-      multiplicationCoefficient:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
-      netPurchasePrice:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
-      netSellingPrice:['', Validators.pattern(/^-?([0-9]\d*)?$/)],
+      grossPurchasePrice:['', Validators.pattern(/^(\d|,)*\d*$/)],
+      multiplicationCoefficient:['', Validators.pattern(/^(\d|,)*\d*$/)],
+      netPurchasePrice:['', Validators.pattern(/^(\d|,)*\d*$/)],
+      netSellingPrice:['', Validators.pattern(/^(\d|,)*\d*$/)],
     });
   }
   /**
@@ -48,7 +48,7 @@ export class CalculatorPage implements OnInit {
     }
 
     //calcule of discountRateCalculated
-    if( form.value.grossPurchasePrice.length != 0 && form.value.netPurchasePrice.length != 0){
+    if( form.value.grossPurchasePrice.length != 0 && form.value.netPurchasePrice.length != 0 && form.value.grossPurchasePrice >=  form.value.netPurchasePrice ){
       this.discountRateCalculated = (1 - form.value.netPurchasePrice / form.value.grossPurchasePrice) * 100 ; 
     }
     else{
