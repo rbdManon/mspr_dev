@@ -21,46 +21,71 @@
                 <ion-label position="floating"> Prix d’achat brut (€) </ion-label>
                 <ion-input formControlName="grossPurchasePrice" (change)="calcule(value)" type="text"></ion-input>
             </ion-item>
+            <ion-item *ngIf="!formCalcule.controls.grossPurchasePrice.valid  && (formCalcule.controls.grossPurchasePrice.dirty || submitAttempt)">
+                <p>Veuillez saisir un nombre positif .</p>
+              </ion-item>
           </ion-col>
         <ion-col col-2>
             <ion-item class="padding-left-2px">
                 <ion-label position="floating">Coef multiplicateur </ion-label>
                 <ion-input formControlName="multiplicationCoefficient" (change)="calcule(value)" type="text"></ion-input>
             </ion-item>
+            <ion-item *ngIf="!formCalcule.controls.multiplicationCoefficient.valid  && (formCalcule.controls.multiplicationCoefficient.dirty || submitAttempt)">
+                <p>Veuillez saisir un nombre positif .</p>
+              </ion-item>
         </ion-col>
         <ion-col col-2>
             <ion-item class="padding-left-2px">
                 <ion-label position="floating">Prix d'achat net (€) </ion-label>
                 <ion-input formControlName="netPurchasePrice" (change)="calcule(value)" type="text"></ion-input>
             </ion-item>
+            <ion-item *ngIf="!formCalcule.controls.netPurchasePrice.valid  && (formCalcule.controls.netPurchasePrice.dirty || submitAttempt)">
+                <p>Veuillez saisir un nombre positif .</p>
+              </ion-item>
         </ion-col>
         <ion-col col-2>
             <ion-item class="padding-left-2px">
                 <ion-label position="floating">Prix de vente net (€) </ion-label>
                 <ion-input formControlName="netSellingPrice" (change)="calcule(value)"  type="text"></ion-input>
             </ion-item>
+            <ion-item *ngIf="!formCalcule.controls.netSellingPrice.valid  && (formCalcule.controls.netSellingPrice.dirty || submitAttempt)">
+                <p>Veuillez saisir un nombre positif .</p>
+              </ion-item>
         </ion-col>
       </ion-row> 
     </form>
 
       <h4> Résultats</h4>
-          <ion-item class="ion-item-result">
-              <ion-label >Taux de remise (%) <ion-icon name="information-circle-outline" tooltip="Saisissez le prix d'achat brut et net"></ion-icon> = </ion-label>
+        <ion-item>
+              <div class="tooltip">
+                <ion-icon name="information-circle-outline"></ion-icon>
+                <span class="tooltiptext">Taux de remise = (1 – Prix d’achat net / Prix d’achat brut) x 100 </span>
+              </div> 
+              <ion-label >Taux de remise (%) = </ion-label>
               <ion-input [(ngModel)]="discountRateCalculated" readonly type="text" value="0" ></ion-input>
-          </ion-item>
-        <ion-item class="ion-item-result"> 
-            <ion-label>Prix d'achat net (€) <ion-icon name="information-circle-outline"></ion-icon> = </ion-label>
+        </ion-item>
+        <ion-item> 
+            <div class="tooltip">
+                <ion-icon name="information-circle-outline"></ion-icon>
+                <span class="tooltiptext">Prix d’achat net = Prix d’achat brut x (1 – taux de remise/100)</span>
+            </div> 
+            <ion-label>Prix d'achat net (€)  = </ion-label>
             <ion-input [(ngModel)]="netPurchasePriceCalculated" readonly type="text" value="0"></ion-input>
         </ion-item>
-      <ion-item class="ion-item-result"> 
-          <ion-label >Prix de vente net (€) <ion-icon name="information-circle-outline"   ngbTooltip="Click outside or press Escape to close" tooltipClass="tooltip"  ></ion-icon> = </ion-label> 
+        <ion-item>
+            <div class="tooltip">
+                <ion-icon name="information-circle-outline"></ion-icon>
+                <span class="tooltiptext">Prix de vente net = prix d’achat net x coefficient multiplicateur</span>
+            </div> 
+          <ion-label >Prix de vente net (€) = </ion-label> 
           <ion-input [(ngModel)]="netSellingPriceCalculated" readonly type="text" value="0"></ion-input>
       </ion-item>
-    <ion-item class="ion-item-result">
-        <ion-label >Coef multiplicateur 
-        <ion-icon name="information-circle-outline" tooltip="I'm a tooltip below a button" positionV="bottom" >
-        </ion-icon> = 
-        </ion-label>
+    <ion-item >
+        <div class="tooltip">
+          <ion-icon name="information-circle-outline"></ion-icon>
+          <span class="tooltiptext">Coefficient multiplicateur = Prix de vente net / Prix d’achat net </span>
+        </div>   
+        <ion-label >Coef multiplicateur =</ion-label>
         <ion-input [(ngModel)]="multiplicationCoefficientCalculated" readonly type="text" value="0"></ion-input>
     </ion-item>
 </ion-content>
