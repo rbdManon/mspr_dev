@@ -5,7 +5,7 @@ import { RestProvider } from './RestProvider';
     providedIn: 'root'
 })
 export class ApiProvider<E> {
-    protected api_endpoint: string = "http://localhost:8080/";
+    protected api_endpoint: string = "http://localhost:8001/";
     protected table_name: string = null;
 
     public constructor(
