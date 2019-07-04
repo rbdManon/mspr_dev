@@ -12,7 +12,12 @@ export class HomePage {
     this.navCtrl.navigateForward('calculator');
   }
   toMap(){
-    this.navCtrl.navigateForward('map');
+    if(window.navigator.onLine) {
+      this.navCtrl.navigateForward('map');
+    }
+    else {
+      this.navCtrl.navigateForward('map-offline');
+    }
   }
   toFormList(){
     this.navCtrl.navigateForward('form/list');
