@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { FormEditPage } from './form-edit.page';
 import { QuestionEditComponent } from '../components/question-edit/question-edit.component';
+import { SharedModule } from 'src/app/components/shared.module';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule,
   ],
   declarations: [FormEditPage, QuestionEditComponent],
   entryComponents: [QuestionEditComponent],

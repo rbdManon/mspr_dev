@@ -37,8 +37,8 @@
       <ion-card-title>Réponses possibles :</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-item *ngFor="let option of question._options">
-        <ion-input type="text" [(ngModel)]="option"></ion-input>
+      <ion-item *ngFor="let option of options; let i = index">
+        <ion-input type="text" [(ngModel)]="option" (ionChange)="preSaveOption(i, $event)"></ion-input>
         <ion-icon slot="end" name="trash" (click)="deleteOption(option)"></ion-icon>
       </ion-item>
 

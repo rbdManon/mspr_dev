@@ -111,14 +111,33 @@ export class FormEditPage {
 
   save() {
     this.FormProvider.save(this.form)
-    .then((form) => {
-      this.form = form
-      this.navCtrl.navigateBack('/form/list')
+    .then(() => {
+      this.saveQuestions();
+      
     })
     .catch(() => {
       this.AlertController.create({
         header: 'Erreur !',
         subHeader: "Impossible d'enregistrer le formulaire !",
+        buttons: ['OK']
+      }).then((alert) => alert.present())
+    })
+  }
+
+  saveQuestions() {
+    let savePromises = []
+    this.questions.forEach(question => {
+      savePromises.push(this.QuestionProvider.save(question))
+    })
+
+    Promise.all(savePromises)
+    .then(() => {
+      this.navCtrl.navigateBack('/form/list')
+    })
+    .catch(() => {
+      this.AlertController.create({
+        header: 'Erreur !',
+        subHeader: "Impossible d'enregistrer l'une des questions !",
         buttons: ['OK']
       }).then((alert) => alert.present())
     })

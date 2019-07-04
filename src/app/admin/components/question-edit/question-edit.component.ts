@@ -18,8 +18,13 @@ export class QuestionEditComponent {
   ) { }
 
   @Input() question: Question;
+  options = null
+  optionToSave = null
+  ids = []
 
   ionViewDidEnter() {
+    this.options = this.question._options
+    this.optionToSave = JSON.parse(JSON.stringify(this.options))
   }
 
   addOption() {
@@ -54,7 +59,12 @@ export class QuestionEditComponent {
     }
   }
 
+  preSaveOption(key, e) {
+    this.optionToSave[key] = e.target.value
+  }
+
   save() {
+    this.question._options = this.optionToSave
     this.QuestionProvider.save(this.question)
     .then((question) => {
       this.ModalController.dismiss(question)
