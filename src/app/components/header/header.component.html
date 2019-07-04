@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar [color]="toolbar_color">
     <ion-title>
         <ion-icon *ngIf="username != ''" class="nav-item-right" name="exit" (click)="logout()"></ion-icon>
         <ion-icon class="nav-item-right" name="home" (click)="goHome()"></ion-icon>

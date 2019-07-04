@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingPageModule, MaterialBarModule  } from 'angular-loading-page';
+import { NetworkStatusAngularModule } from 'network-status-angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { LoadingPageModule, MaterialBarModule  } from 'angular-loading-page';
     HttpClientModule,
     LoadingPageModule,
     MaterialBarModule,
+    NetworkStatusAngularModule.forRoot()
   ],
   providers: [
     StatusBar,

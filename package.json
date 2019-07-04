@@ -46,6 +46,8 @@
     "ionic-selectable": "^4.4.1",
     "json-object-mapper": "^1.6.0",
     "leaflet": "^1.5.1",
+    "network-status-angular": "^1.0.4",
+    "ng-connection-service": "^1.0.4",
     "rxjs": "~6.5.1",
     "sha256": "^0.2.0",
     "sweetalert2": "^8.11.5",
