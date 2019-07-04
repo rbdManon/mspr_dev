@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { MapOfflinePage } from './map-offline.page';
 import { MapOfflineComponent } from '../components/map-offline-component/map-offline.component';
+import { SharedModule } from '../components/shared.module';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
+    SharedModule,
   ],
   declarations: [MapOfflinePage,MapOfflineComponent],
 })

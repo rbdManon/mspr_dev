@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { FormPage } from './form.page';
 import { IonicSelectableModule } from 'ionic-selectable';
+import { SharedModule } from '../components/shared.module';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    IonicSelectableModule
+    IonicSelectableModule,
+    SharedModule,
   ],
   declarations: [FormPage],
   exports: []
