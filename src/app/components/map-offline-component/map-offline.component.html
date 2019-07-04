@@ -1,18 +1,18 @@
-<ion-grid style="margin-left: 10%;text-align: center;" padding>
 
-  <div style="width: 40%;display:inline-block" *ngFor="let practicioner of array">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle style="text-align:left">{{ practicioner.firstname }} {{ practicioner.lastname }} <ion-chip
-            style="float: right;color:white" class="{{practicioner.color}}">{{ practicioner.distance }} km</ion-chip>
-        </ion-card-subtitle>
-        <ion-card-title style="text-align: left">{{ practicioner.address }},{{ practicioner.postcode }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <h1>{{ practicioner.companyName }} - {{ practicioner.city }}</h1>
-      </ion-card-content>
-      <ion-chip style="float: right;color:white;background-color:#5772F8">Accéder</ion-chip>
-    </ion-card>
-  </div>
-
-</ion-grid>
+        <ion-card *ngFor="let practicioner of array">
+          <ion-card-header>
+            <ion-card-title style="height: 50px;">
+              {{ practicioner.firstname }} {{ practicioner.lastname }}
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content style="height: 150px;">
+            <b>Société :</b> {{ practicioner.companyName }}<br><br>
+            <b>Adresse :</b> <br>
+            {{ practicioner.address }}<br>
+            {{ practicioner.city }}, {{ practicioner.postcode }}<br>
+          </ion-card-content>
+          <ion-footer>
+            <ion-chip style="color:white;" class="{{practicioner.color}}">{{ practicioner.distance }} km</ion-chip>
+            <ion-chip style="float: right;color:white;background-color:#5772F8">Accéder</ion-chip>
+          </ion-footer>
+        </ion-card>

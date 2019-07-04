@@ -35,6 +35,10 @@ export class MapOfflinePage implements OnInit {
 
       })
       this.array = practitioners as [Practitioner];
+
+      this.array = this.array.sort((a,b) => {
+        return a.distance > b.distance ? 1 : -1
+      })
     })
   }
 
